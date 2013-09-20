@@ -30,6 +30,11 @@ What about other solutions?
 
 [This rake task](https://github.com/rails/sprockets-rails/issues/49#issuecomment-20535134) will solve this problem, but requires an extra rake task. It won't work by default with things like capistrano / heroku. And it requires you to manage the code in your app.
 
+Why do I need digest assets at all?
+-----------------------------------
+
+Digests are used for cache busting. Remember that if you use the non-digest assets and serve them with far-future expires headers, you will cause problems with cached assets if the contents ever need to change. You must bear this in mind when using non-digest assets.
+
 Why is this not the default / a config option in Rails 4?
 ---------------------------------------------------------
 
