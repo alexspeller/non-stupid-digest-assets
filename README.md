@@ -21,10 +21,10 @@ If you want to whitelist non-digest assets for only certain files, you can confi
 # config/initializers/non_digest_assets.rb
 
 NonStupidDigestAssets.whitelist = [/tinymce\/.*/, "full/file/path.txt"]
+```
 
 Be sure to give either a regex that will match the right assets or a full
 path to the asset in question.
-```
 
 But shouldn't I always use the Rails asset helpers anyway?
 ----------------------------------------------------------
