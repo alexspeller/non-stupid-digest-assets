@@ -19,6 +19,7 @@ If you want to whitelist non-digest assets for only certain files, you can confi
 
 ```ruby
 # config/initializers/non_digest_assets.rb
+require 'non_stupid_digest_assets'
 
 NonStupidDigestAssets.whitelist = [/tinymce\/.*/, "full/file/path.txt"]
 ```
