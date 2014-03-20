@@ -13,12 +13,7 @@ module NonStupidDigestAssets
     def whitelisted_files(files)
       files.select do |file, info|
         whitelist.any? do |item|
-          case item
-          when Regexp
-            info['logical_path'] =~ item
-          else
-            info['logical_path'] == item
-          end
+          item === info['logical_path']
         end
       end
     end
