@@ -28,7 +28,7 @@ module Sprockets
       NonStupidDigestAssets.files(files).each do |(digest_path, info)|
         full_digest_path = File.join dir, digest_path
         full_digest_gz_path = "#{full_digest_path}.gz"
-        full_non_digest_path = File.join dir, info['logical_path']
+        full_non_digest_path = File.join dir, "non-digest" , info['logical_path']
         full_non_digest_gz_path = "#{full_non_digest_path}.gz"
 
         if File.exists? full_digest_path
@@ -37,12 +37,12 @@ module Sprockets
         else
           logger.debug "Could not find: #{full_digest_path}"
         end
-        if File.exists? full_digest_gz_path
-          logger.debug "Writing #{full_non_digest_gz_path}"
-          FileUtils.copy_file full_digest_gz_path, full_non_digest_gz_path, :preserve_attributes
-        else
-          logger.debug "Could not find: #{full_digest_gz_path}"
-        end
+        # if File.exists? full_digest_gz_path
+        #   logger.debug "Writing #{full_non_digest_gz_path}"
+        #   FileUtils.copy_file full_digest_gz_path, full_non_digest_gz_path, :preserve_attributes
+        # else
+        #   logger.debug "Could not find: #{full_digest_gz_path}"
+        # end
       end
     end
 
