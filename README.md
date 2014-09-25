@@ -20,7 +20,7 @@ If you want to whitelist non-digest assets for only certain files, you can confi
 ```ruby
 # config/initializers/non_digest_assets.rb
 
-NonStupidDigestAssets.whitelist = [/tinymce\/.*/, "image.png"]
+NonStupidDigestAssets.whitelist += [/tinymce\/.*/, "image.png"]
 ```
 
 Be sure to give either a regex that will match the right assets or the logical path of the asset in question.
