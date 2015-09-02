@@ -23,7 +23,7 @@ end
 module Sprockets
   class Manifest
     def compile_with_non_digest *args
-      compile_without_non_digest *args
+      paths = compile_without_non_digest *args
 
       NonStupidDigestAssets.files(files).each do |(digest_path, info)|
         full_digest_path = File.join dir, digest_path
@@ -44,6 +44,7 @@ module Sprockets
           logger.debug "Could not find: #{full_digest_gz_path}"
         end
       end
+      paths
     end
 
     alias_method_chain :compile, :non_digest
