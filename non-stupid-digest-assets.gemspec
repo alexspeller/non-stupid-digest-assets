@@ -17,4 +17,6 @@ Gem::Specification.new do |s|
   s.files         = %w(lib/non-stupid-digest-assets.rb LICENSE README.md)
   s.license       = 'MIT'
   s.require_path  = 'lib'
+
+  s.add_dependency "sprockets", ">= 2.0"
 end
