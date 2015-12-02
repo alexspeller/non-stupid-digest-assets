@@ -1,3 +1,5 @@
+require "sprockets/manifest"
+
 module NonStupidDigestAssets
   mattr_accessor :whitelist
   @@whitelist = []
