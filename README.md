@@ -6,11 +6,6 @@ What is it?
 
 In Rails 4, there is no way to by default compile both digest and non-digest assets. This is a pain in the arse for almost everyone developing a Rails 4 app. This gem solves the problem with the minimum possible effort.
 
-Compatibility
--------------
-
-Currently this gem does not work with rails 4.2 beta. Pull requests welcome!
-
 How do I install it?
 --------------------
 
