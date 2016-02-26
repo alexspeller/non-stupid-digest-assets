@@ -48,4 +48,4 @@ module NonStupidDigestAssets
   end
 end
 
-Sprockets::Manifest.prepend NonStupidDigestAssets::CompileWithNonDigest
+Sprockets::Manifest.send(:prepend, NonStupidDigestAssets::CompileWithNonDigest)
