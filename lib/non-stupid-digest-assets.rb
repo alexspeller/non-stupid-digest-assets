@@ -1,16 +1,27 @@
 require "sprockets/manifest"
 
 module NonStupidDigestAssets
-  mattr_accessor :whitelist
+  mattr_accessor :whitelist, :blacklist
   @@whitelist = []
+  @@blacklist = []
 
   class << self
+    
     def files(files)
-      return files if whitelist.empty?
-      whitelisted_files(files)
+      return files if whitelist.empty? && blacklist.empty?
+      w_files = whitelist.present? ? whitelisted_files(files) : files
+      return blacklist.present? ? blacklisted_files(w_files) : w_files
     end
 
     private
+    
+    def blacklisted_files(files)
+      files.select do |file, info|
+        blacklist.any? do |item|
+          item != info['logical_path']
+        end
+      end
+    end
 
     def whitelisted_files(files)
       files.select do |file, info|
