@@ -5,17 +5,17 @@ module NonStupidDigestAssets
   @@whitelist = []
 
   class << self
-    def files(files)
-      return files if whitelist.empty?
-      whitelisted_files(files)
+    def assets(assets)
+      return assets if whitelist.empty?
+      whitelisted_assets(assets)
     end
 
     private
 
-    def whitelisted_files(files)
-      files.select do |file, info|
+    def whitelisted_assets(assets)
+      assets.select do |logical_path, digest_path|
         whitelist.any? do |item|
-          item === info['logical_path']
+          item === logical_path
         end
       end
     end
@@ -24,10 +24,10 @@ module NonStupidDigestAssets
   module CompileWithNonDigest
     def compile *args
       paths = super
-      NonStupidDigestAssets.files(files).each do |(digest_path, info)|
+      NonStupidDigestAssets.assets(assets).each do |(logical_path, digest_path)|
         full_digest_path = File.join dir, digest_path
         full_digest_gz_path = "#{full_digest_path}.gz"
-        full_non_digest_path = File.join dir, info['logical_path']
+        full_non_digest_path = File.join dir, logical_path
         full_non_digest_gz_path = "#{full_non_digest_path}.gz"
 
         if File.exists? full_digest_path
