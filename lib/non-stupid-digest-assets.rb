@@ -1,8 +1,9 @@
 require "sprockets/manifest"
 
 module NonStupidDigestAssets
-  mattr_accessor :whitelist
+  mattr_accessor :whitelist, :destupidify_mode
   @@whitelist = []
+  @@destupidify_mode = :copy
 
   class << self
     def assets(assets)
@@ -30,20 +31,25 @@ module NonStupidDigestAssets
         full_non_digest_path = File.join dir, logical_path
         full_non_digest_gz_path = "#{full_non_digest_path}.gz"
 
-        if File.exists? full_digest_path
-          logger.debug "Writing #{full_non_digest_path}"
-          FileUtils.copy_file full_digest_path, full_non_digest_path, :preserve_attributes
-        else
-          logger.debug "Could not find: #{full_digest_path}"
-        end
-        if File.exists? full_digest_gz_path
-          logger.debug "Writing #{full_non_digest_gz_path}"
-          FileUtils.copy_file full_digest_gz_path, full_non_digest_gz_path, :preserve_attributes
-        else
-          logger.debug "Could not find: #{full_digest_gz_path}"
-        end
+        destupidify_digest_asset full_digest_path, full_non_digest_path
+        destupidify_digest_asset full_digest_gz_path, full_non_digest_gz_path
       end
       paths
+    end
+
+    private
+
+    def destupidify_digest_asset(digest_path, non_digest_path)
+      if File.exists? digest_path
+        logger.debug "Writing #{non_digest_path}"
+        if NonStupidDigestAssets.destupidify_mode == :move
+          FileUtils.mv digest_path, non_digest_path
+        else
+          FileUtils.copy_file digest_path, non_digest_path, :preserve_attributes
+        end
+      else
+        logger.debug "Could not find: #{digest_path}"
+      end
     end
   end
 end
