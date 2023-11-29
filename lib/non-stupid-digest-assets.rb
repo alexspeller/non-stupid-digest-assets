@@ -32,13 +32,13 @@ module NonStupidDigestAssets
 
         if File.exist? full_digest_path
           logger.debug "Writing #{full_non_digest_path}"
-          FileUtils.copy_file full_digest_path, full_non_digest_path, :preserve_attributes
+          FileUtils.ln_s full_digest_path, full_non_digest_path, :force => true
         else
           logger.debug "Could not find: #{full_digest_path}"
         end
         if File.exist? full_digest_gz_path
           logger.debug "Writing #{full_non_digest_gz_path}"
-          FileUtils.copy_file full_digest_gz_path, full_non_digest_gz_path, :preserve_attributes
+          FileUtils.ln_s full_digest_gz_path, full_non_digest_gz_path, :force => true
         else
           logger.debug "Could not find: #{full_digest_gz_path}"
         end
