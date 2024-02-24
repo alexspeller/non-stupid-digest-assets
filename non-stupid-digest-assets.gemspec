@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name        = "non-stupid-digest-assets"
-  s.version     = "1.0.9"
+  s.version     = "1.0.11"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Alex Speller"]
   s.email       = ["alex@alexspeller.com"]
-  s.homepage    = "http://github.com/alexspeller/non-stupid-digest-assets"
+  s.homepage    = "https://github.com/alexspeller/non-stupid-digest-assets"
   s.summary     = "Fix the Rails 4 asset pipeline to generate non-digest along with digest assets"
   s.description = <<-DESCRIPTION
     Rails 4, much to everyone's annoyance, provides no option to generate both digest
